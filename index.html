@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Doge &amp; Eimoh Packs</title>
+<meta name="description" content="Download the Doge Private V1 and Eimoh 32x + DRAC0Q texture packs for Minecraft 1.12, 1.14, 1.16.5, 1.19 and 1.21.11.">
+<link rel="icon" href="img/eimoh.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@500;700&family=Figtree:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0d1a20;
+    --panel: #14262e;
+    --line: #2a4450;
+    --text: #e9eff1;
+    --muted: #93a8b0;
+    --doge: #f08a3c;
+    --eimoh: #dcbb8c;
+    --ink: #0d1a20;
+  }
+  * { box-sizing: border-box; }
+  html { color-scheme: dark; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font: 400 1rem/1.55 "Figtree", system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+  main { max-width: 56rem; margin: 0 auto; padding: 4rem 1rem 3rem; }
+  h1, h2 { font-family: "Pixelify Sans", ui-monospace, monospace; font-weight: 700; margin: 0; letter-spacing: .01em; }
+  h1 { font-size: clamp(2.4rem, 8vw, 4.2rem); line-height: 1; }
+  .lede { color: var(--muted); max-width: 34rem; margin: 1rem 0 3rem; }
+
+  .pack {
+    --accent: var(--doge);
+    display: grid;
+    grid-template-columns: 11rem 1fr;
+    gap: 1.75rem;
+    padding: 1.5rem;
+    background: var(--panel);
+    border: 2px solid var(--line);
+    border-left: 8px solid var(--accent);
+    margin-bottom: 1.25rem;
+  }
+  .pack.eimoh { --accent: var(--eimoh); }
+  .pack img {
+    width: 11rem; height: 11rem; display: block;
+    image-rendering: pixelated; object-fit: cover;
+    border: 2px solid var(--line);
+  }
+  .pack h2 { font-size: clamp(1.7rem, 5vw, 2.4rem); line-height: 1.05; }
+  .pack p { margin: .6rem 0 0; color: var(--muted); max-width: 38rem; }
+  .pack p b { color: var(--text); font-weight: 500; }
+
+  form { display: flex; flex-wrap: wrap; gap: .75rem; align-items: stretch; margin-top: 1.25rem; }
+  label { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+  select, .dl {
+    font: 600 1rem/1 "Figtree", system-ui, sans-serif;
+    min-height: 3rem; padding: 0 1rem; border: 2px solid var(--line);
+  }
+  select {
+    background: var(--bg); color: var(--text); min-width: 12rem; cursor: pointer;
+    appearance: none;
+    background-image: linear-gradient(45deg, transparent 50%, var(--muted) 50%), linear-gradient(135deg, var(--muted) 50%, transparent 50%);
+    background-position: calc(100% - 1.15rem) 1.3rem, calc(100% - .8rem) 1.3rem;
+    background-size: .35rem .35rem; background-repeat: no-repeat; padding-right: 2.4rem;
+  }
+  .dl {
+    display: inline-flex; align-items: center; gap: .6rem; text-decoration: none;
+    background: var(--accent); color: var(--ink); border-color: var(--accent);
+  }
+  .dl:hover { filter: brightness(1.08); }
+  .dl:active { transform: translateY(1px); }
+  :focus-visible { outline: 3px solid #fff; outline-offset: 2px; }
+  .file { flex-basis: 100%; margin: 0; font-size: .875rem; color: var(--muted); font-variant-numeric: tabular-nums; }
+
+  footer { margin-top: 3rem; color: var(--muted); font-size: .9rem; max-width: 40rem; }
+  footer p { margin: 0 0 .6rem; }
+
+  @media (max-width: 40rem) {
+    .pack { grid-template-columns: 1fr; padding: 1.1rem; }
+    .pack img { width: 7rem; height: 7rem; }
+    select, .dl { flex: 1 1 100%; }
+  }
+</style>
+</head>
+<body>
+<main>
+  <h1>Texture packs</h1>
+  <p class="lede">Pick your Minecraft version, then download. Each download is ported to that version.</p>
+
+  <div id="packs"></div>
+
+  <footer>
+    <p>Eimoh 32x by Unretiredmarb (1.19 edit by FrogFarmer). DRAC0Q overlay by DRAC0Q, with Fresh Animations models by FreshLX. Transparent Shield by caisem (MIT). Side Shield pose from the Smaller Side Shield pack.</p>
+    <p>The custom entity models in the DRAC0Q overlay need OptiFine or Entity Model Features and are only included for 1.19 and 1.21.11.</p>
+  </footer>
+</main>
+
+<script>
+  // Zips live in /packs and are named [slug]_[version].zip
+  const BASE = "packs/";
+  const PACKS = [
+    {
+      slug: "DogePrivateV1", name: "Doge Private V1", cls: "doge", icon: "img/doge.png",
+      blurb: "<b>32x pack with the Side Shield and Transparent Shield merged in, plus the full DRAC0Q overlay.</b> Connected glass, custom sounds and name tags included.",
+      versions: [
+        ["1.12", "1.12.x", 19306947], ["1.14", "1.14.x", 19976081], ["1.16.5", "1.16.5", 20434552],
+        ["1.19", "1.19 – 1.19.2", 20683223], ["1.21.11", "1.21.11", 21107102]
+      ]
+    },
+    {
+      slug: "Eimoh32x-DRAC0Q", name: "Eimoh 32x + DRAC0Q", cls: "eimoh", icon: "img/eimoh.png",
+      blurb: "<b>Eimoh 32x with the DRAC0Q overlay on top and the Transparent Shield.</b> Old-style items, GUI and connected glass carried over to each version.",
+      versions: [
+        ["1.12", "1.12.x", 8459672], ["1.14", "1.14.x", 8679990], ["1.16.5", "1.16.5", 8695334],
+        ["1.19", "1.19 – 1.19.2", 8910811], ["1.21.11", "1.21.11", 8357838]
+      ]
+    }
+  ];
+  const mb = n => (n / 1048576).toFixed(1) + " MB";
+  const root = document.getElementById("packs");
+
+  PACKS.forEach((p, i) => {
+    const el = document.createElement("section");
+    el.className = "pack " + p.cls;
+    el.innerHTML = `
+      <img src="${p.icon}" alt="" width="176" height="176">
+      <div>
+        <h2>${p.name}</h2>
+        <p>${p.blurb}</p>
+        <form onsubmit="return false">
+          <label for="v${i}">Minecraft version for ${p.name}</label>
+          <select id="v${i}">${p.versions.map(v => `<option value="${v[0]}">${v[1]}</option>`).join("")}</select>
+          <a class="dl" id="d${i}" download>Download</a>
+          <p class="file" id="f${i}"></p>
+        </form>
+      </div>`;
+    root.appendChild(el);
+    const sel = el.querySelector("select"), a = el.querySelector(".dl"), f = el.querySelector(".file");
+    const update = () => {
+      const v = p.versions.find(x => x[0] === sel.value);
+      const file = `${p.slug}_${v[0]}.zip`;
+      a.href = BASE + file;
+      a.setAttribute("download", file);
+      f.textContent = `${file} · ${mb(v[2])}`;
+    };
+    sel.addEventListener("change", update);
+    update();
+  });
+</script>
+</body>
+</html>
